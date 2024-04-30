@@ -1,45 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App.jsx';
 import DepartmentTable from './components/Department/DepartmentTable.jsx';
 import DepartmentForm from './components/Department/DepartmentForm.jsx';
-import DepartmentFormUpdate from './components/Department/DepartmentFormUpdate.jsx'
+import DepartmentFormUpdate from './components/Department/DepartmentFormUpdate.jsx';
+import Home from './layout/Home.jsx'; // Import the Home component
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './index.css';
 
-
-import './index.css'
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App></App>,
-   
-    children: [
-      {
-        path: "department-table",
-        element: <DepartmentTable></DepartmentTable>
-        
-      },
-      {
-        path: "department-form",
-        element: <DepartmentForm></DepartmentForm>
-        
-      },
-      {
-        path: "department-form-update",
-        element: <DepartmentFormUpdate></DepartmentFormUpdate>
-        
-      },
-    ],
-  },
-]);
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="/" element={<Home />} /> {/* This is the Home route */}
+          <Route path="department-table" element={<DepartmentTable />} />
+          <Route path="department-form" element={<DepartmentForm />} />
+          <Route path="department-form-update" element={<DepartmentFormUpdate />} />
+        </Route>
+      </Routes>
+    </Router>
   </React.StrictMode>,
-)
+  document.getElementById('root')
+);
